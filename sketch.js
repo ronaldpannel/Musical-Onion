@@ -1,3 +1,5 @@
+const playBtn = document.getElementById("btn");
+
 let polygon = [];
 let num = 15;
 let sides0 = 3;
@@ -23,21 +25,26 @@ function setup() {
 function draw() {
   background("#ED6800");
   translate(width / 2, height / 2);
+
+  playBtn.addEventListener("click", () => {
+    if (getAudioContext().state !== "running") {
+      getAudioContext().resume();
+    }
+  });
   for (let i = polygon.length - 1; i >= 0; i--) {
     polygon[i].update();
     polygon[i].draw();
   }
 }
 
-
 function windowResized() {
   resizeCanvas(400, 400);
 }
-function mousePressed() {
-  play = !play;
-  if (play) {
-    osc.amp(1, 0.05);
-  } else {
-    osc.amp(0, 0.05);
-  }
-}
+// function mousePressed() {
+//   play = !play;
+//   if (play) {
+//     osc.amp(1, 0.05);
+//   } else {
+//     osc.amp(0, 0.05);
+//   }
+// }
